@@ -60,7 +60,6 @@ export const Dashboard = () => {
 
   return (
     <>
-      {console.log(games)}
       <header className="bg-red-500 text-white p-4">
         <div className="container max-w-3xl flex justify-between">
           <Icon name="logoRed" className="w-28 md:w-40"/>
@@ -73,7 +72,7 @@ export const Dashboard = () => {
       <main className="space-y-6">
         <section id="header" className="bg-red-500 text-white">
           <div className="container max-w-3xl space-y-2 p-4">
-            <span>Olá Elton</span>
+            <span>Olá {`/${auth?.user?.username}`}</span>
             <h3 className="text-2xl font-bold">Qual é o seu palpite?</h3>
           </div>
         </section>
