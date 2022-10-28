@@ -15,6 +15,8 @@ export const Profile = () => {
 
   const [currentDate, setDate] = useState(formatISO(new Date(2022, 10, 20)))
 
+  console.log(currentDate)
+
   const [{ value: user, loading, error }, fetchHunches] = useAsyncFn( async () => {
     const res = await axios({
       method: 'get',

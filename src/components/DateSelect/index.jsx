@@ -1,10 +1,16 @@
-import { addDays, subDays, format, formatISO } from "date-fns";
+import { addDays, subDays, format, formatISO, compareAsc, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import { Icon } from "~/components/Icon"
 
 export const DateSelect = ({ currentDate, onChange }) => {
   
+  if ( compareAsc(parseISO(currentDate), new Date(2022, 10, 20)) !== 1 ) {
+    var currentDate = formatISO(new Date(2022, 10, 20))
+  } else if ( compareAsc(parseISO(currentDate), new Date(2022, 11, 2)) === 1 ) {
+    var currentDate = formatISO(new Date(2022, 11, 2))
+  }
+    
   const date = new Date(currentDate)
 
   const prevDay = () => {
@@ -17,10 +23,16 @@ export const DateSelect = ({ currentDate, onChange }) => {
   }
 
   return (
-    <div className="flex space-x-4 items-center justify-center p-4">
-      <Icon name="arrowLeft" className="w-6 text-red-500 cursor-pointer" onClick={prevDay}/>
+    <div className="flex space-x-4 items-center justify-center p-4" disabled={true}>
+      {
+        compareAsc(parseISO(currentDate), new Date(2022, 10, 20)) !== 0 &&
+        <Icon name="arrowLeft" className="w-6 text-red-500 cursor-pointer" onClick={prevDay}/>
+      }
       <span className="font-bold">{format(date, "d 'de' MMMM", {locale: ptBR})}</span>
-      <Icon name="arrowRight" className="w-6 text-red-500 cursor-pointer" onClick={nextDay}/>
+      {
+        compareAsc(parseISO(currentDate), new Date(2022, 11, 2)) !== 0 &&
+        <Icon name="arrowRight" className="w-6 text-red-500 cursor-pointer" onClick={nextDay}/>
+      }
     </div>
   )
 }
