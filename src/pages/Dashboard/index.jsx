@@ -60,6 +60,7 @@ export const Dashboard = () => {
 
   return (
     <>
+      {console.log(games)}
       <header className="bg-red-500 text-white p-4">
         <div className="container max-w-3xl flex justify-between">
           <Icon name="logoRed" className="w-28 md:w-40"/>

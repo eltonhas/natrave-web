@@ -15,7 +15,6 @@ export const Profile = () => {
 
   const [currentDate, setDate] = useState(formatISO(new Date(2022, 10, 20)))
 
-  console.log(currentDate)
 
   const [{ value: user, loading, error }, fetchHunches] = useAsyncFn( async () => {
     const res = await axios({
@@ -69,7 +68,7 @@ export const Profile = () => {
       <header className="bg-red-500 text-white p-4">
         <div className="container max-w-3xl flex justify-between">
           <Icon name="logoRed" className="w-28 md:w-40"/>
-          {auth?.user?.id &&
+          {auth?.user?.username === params.username &&
             <div onClick={logout} className="p-2 cursor-pointer">
               Sair
             </div>
@@ -80,9 +79,11 @@ export const Profile = () => {
       <main className="space-y-6">
         <section id="header" className="bg-red-500 text-white">
           <div className="container max-w-3xl space-y-2 p-4">
-            <a href="/dashboard">
-              <Icon name="back" className="w-10"/>
-            </a>
+            {auth?.user?.username === params.username &&
+              <a href="/dashboard">
+                <Icon name="back" className="w-10"/>
+              </a>
+            }
             <h3 className="text-2xl font-bold">{user?.name}</h3>
           </div>
         </section>
